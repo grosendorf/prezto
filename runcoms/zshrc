@@ -1,9 +1,6 @@
 #
 # Executes commands at the start of an interactive session.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -11,3 +8,64 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+export CHEF_REPO_DIR=${ZDOTDIR:-$HOME}/Workspace/Deployment/chef
+export EDITOR=vim
+unsetopt correct_all
+export PATH=$PATH:${ZDOTDIR:-$HOME}/Workspace/android-sdk-macosx/platform-tools:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin
+eval "$(chef shell-init zsh)"
+export PYTHONPATH=${ZDOTDIR:-$HOME}/Workspace/Deployment/scripts/lib
+export COPYFILE_DISABLE=true
+autoload -Uz history-beginning-search-menu
+zle -N history-beginning-search-menu
+bindkey '^X^X' history-beginning-search-menu
+bindkey -M viins '^R' history-incremental-search-backward
+bindkey -M vicmd '^R' history-incremental-search-backward
+bindkey -v
+alias lr='ls -lrth'
+alias s3cmd='s3cmd -c ${AWS_FILES}/s3cfg_${AWS_ACCOUNT}'
+
+# AWS Tools API
+AWS_BASE=~/.aws
+AWS_FILES=${AWS_BASE}/aws_files
+export EC2_HOME=${AWS_BASE}/ec2-api-tools
+export AWS_ELB_HOME=${AWS_BASE}/ElasticLoadBalancing
+export AWS_AUTO_SCALING_HOME=${AWS_BASE}/AutoScaling
+export AWS_EMR_HOME=${AWS_BASE}/elastic-map-reduce
+export PATH=${PATH}:${EC2_HOME}/bin:${AWS_ELB_HOME}/bin:${AWS_AUTO_SCALING_HOME}/bin:/Applications/Android\ Studio.app/sdk/platform-tools:${AWS_EMR_HOME}
+
+# AWS Credentials
+aws_on() {
+ export AWS_FULL=${1}
+ export AWS_ACCOUNT=$(echo ${1} | awk -F "_" '{print $1}')
+ # AWS API
+ export AWS_CREDENTIAL_FILE=${AWS_FILES}/credential-file_${AWS_ACCOUNT}
+ #Chef Settings
+ export CHEF_CREDENTIAL_FILE=${CHEF_REPO_DIR}/config/chef-settings_${AWS_ACCOUNT}
+ #Chef Server
+ export CHEF_SERVER_URL=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_server_url | cut -d '=' -f 2`
+ # EC2 API
+ export AWS_ACCESS_KEY=`cat ${AWS_CREDENTIAL_FILE} |grep AWSAccessKey |cut -d '=' -f 2`
+ export AWS_SECRET_KEY=`cat ${AWS_CREDENTIAL_FILE} |grep AWSSecretKey |cut -d '=' -f 2`
+ export AWS_REGION=$(echo ${1} | awk -F "_" '{print $2}')
+ # BOTO
+ export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}
+ export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_KEY}
+ # WHISK
+ export WHISK_CONFIG=${CHEF_REPO_DIR}/config/whisk-${AWS_FULL}.yml
+ export CLIENT_KEY=~/.chef/${ZDOTDIR:-$USER}-${AWS_ACCOUNT}.pem
+}
+
+aws_off() {
+ unset AWS_FULL
+ unset AWS_ACCOUNT
+ unset AWS_CREDENTIAL_FILE
+ unset AWS_ACCESS_KEY
+ unset AWS_SECRET_KEY
+ unset AWS_ACCESS_KEY_ID
+ unset AWS_SECRET_ACCESS_KEY
+}
+
+finder_showall() {
+ defaults write com.apple.finder AppleShowAllFiles ${1}
+ killall Finder
+}
