@@ -115,7 +115,7 @@ function prompt_cloud_setup {
 
   # Define prompts.
   PROMPT='%B%F{$primary_color}${prefix}%f%b  %B%F{$secondary_color}%c%f%b ${git_info:+${(e)git_info[prompt]}} '
-  RPROMPT='%B%F${AWS_ACCOUNT}%f%b'
+  RPROMPT='%B%F${AWS_ACCOUNT} %T%f%b'
 }
 
 prompt_cloud_setup "$@"
