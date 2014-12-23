@@ -34,6 +34,7 @@ export PATH=${PATH}:/Users/grosendorf/Workspace/ansible/bin:${EC2_HOME}/bin:${AW
 export PYTHONPATH=/Users/grosendorf/Workspace/slingshot-aws/pyslingshot:/Users/grosendorf/Workspace/ansible/lib:/Users/grosendorf/Workspace/Deployment/scripts/lib
 export MANPATH=/Users/grosendorf/Workspace/ansible/docs/man:
 
+alias sga='cat ~/.zprezto/modules/git/alias.zsh'
 # AWS Credentials
 aws_on() {
  export AWS_FULL=${1}
