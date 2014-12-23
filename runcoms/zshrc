@@ -13,7 +13,6 @@ export EDITOR=vim
 unsetopt correct_all
 export PATH=$PATH:${ZDOTDIR:-$HOME}/Workspace/android-sdk-macosx/platform-tools:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin
 eval "$(chef shell-init zsh)"
-export PYTHONPATH=${ZDOTDIR:-$HOME}/Workspace/Deployment/scripts/lib
 export COPYFILE_DISABLE=true
 autoload -Uz history-beginning-search-menu
 zle -N history-beginning-search-menu
@@ -31,7 +30,9 @@ export EC2_HOME=${AWS_BASE}/ec2-api-tools
 export AWS_ELB_HOME=${AWS_BASE}/ElasticLoadBalancing
 export AWS_AUTO_SCALING_HOME=${AWS_BASE}/AutoScaling
 export AWS_EMR_HOME=${AWS_BASE}/elastic-map-reduce
-export PATH=${PATH}:${EC2_HOME}/bin:${AWS_ELB_HOME}/bin:${AWS_AUTO_SCALING_HOME}/bin:/Applications/Android\ Studio.app/sdk/platform-tools:${AWS_EMR_HOME}
+export PATH=${PATH}:/Users/grosendorf/Workspace/ansible/bin:${EC2_HOME}/bin:${AWS_ELB_HOME}/bin:${AWS_AUTO_SCALING_HOME}/bin:/Applications/Android\ Studio.app/sdk/platform-tools:${AWS_EMR_HOME}
+export PYTHONPATH=/Users/grosendorf/Workspace/slingshot-aws/pyslingshot:/Users/grosendorf/Workspace/ansible/lib:/Users/grosendorf/Workspace/Deployment/scripts/lib
+export MANPATH=/Users/grosendorf/Workspace/ansible/docs/man:
 
 # AWS Credentials
 aws_on() {
