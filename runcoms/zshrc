@@ -7,6 +7,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+source /usr/local/bin/virtualenvwrapper.sh
+
 # Customize to your needs...
 export CHEF_REPO_DIR=${ZDOTDIR:-$HOME}/Workspace/Deployment/chef
 export EDITOR=vim
@@ -31,8 +33,8 @@ export AWS_ELB_HOME=${AWS_BASE}/ElasticLoadBalancing
 export AWS_AUTO_SCALING_HOME=${AWS_BASE}/AutoScaling
 export AWS_EMR_HOME=${AWS_BASE}/elastic-map-reduce
 export PATH=${PATH}:/Users/grosendorf/Workspace/ansible/bin:${EC2_HOME}/bin:${AWS_ELB_HOME}/bin:${AWS_AUTO_SCALING_HOME}/bin:/Applications/Android\ Studio.app/sdk/platform-tools:${AWS_EMR_HOME}
-export PYTHONPATH=/Users/grosendorf/Workspace/slingshot-aws/pyslingshot:/Users/grosendorf/Workspace/ansible/lib:/Users/grosendorf/Workspace/Deployment/scripts/lib
 export MANPATH=/Users/grosendorf/Workspace/ansible/docs/man:
+workon twc
 
 alias sga='cat ~/.zprezto/modules/git/alias.zsh'
 # AWS Credentials
