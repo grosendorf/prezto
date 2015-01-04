@@ -24,6 +24,7 @@ bindkey -M vicmd '^R' history-incremental-search-backward
 bindkey -v
 alias lr='ls -lrth'
 alias s3cmd='s3cmd -c ${AWS_FILES}/s3cfg_${AWS_ACCOUNT}'
+alias watch='watch -c'
 
 # AWS Tools API
 AWS_BASE=~/.aws
