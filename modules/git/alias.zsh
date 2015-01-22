@@ -185,5 +185,5 @@ alias gpad='find . -type d -depth 1 -exec bash -c "echo \"pulling {}\"; git --gi
 compdef _git gpad=git-pull-all-dirs
 alias gfad='find . -type d -depth 1 -exec bash -c "echo \"fetching {}\"; git --git-dir={}/.git --work-tree=$PWD/{} fetch -p; git --git-dir={}/.git --work-tree=$PWD/{} fetch --tags" \;'
 compdef _git gpad=git-fetch-all-dirs
-alias gsad='find . -type d -depth 1 -exec bash -c "echo {}; git --git-dir={}/.git --work-tree=$PWD/{} status" \;'
+alias gsad='find . -type d -depth 1 -exec bash -c "echo {}; git --git-dir={}/.git --work-tree=$PWD/{} status --short" \;'
 compdef _git gsad=git-status-all-dirs
