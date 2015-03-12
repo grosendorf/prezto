@@ -45,7 +45,7 @@ aws_on() {
  # AWS API
  export AWS_CREDENTIAL_FILE=${AWS_FILES}/credential-file_${AWS_ACCOUNT}
  #Chef Settings
- export CHEF_CREDENTIAL_FILE=${CHEF_REPO_DIR}/config/chef-settings_${AWS_ACCOUNT}
+ export CHEF_CREDENTIAL_FILE=~/.chef/config/chef-settings_${AWS_ACCOUNT}
  #Chef Server
  export CHEF_SERVER_URL=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_server_url | cut -d '=' -f 2`
  export CHEF_VALIDATOR_NAME=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_validator_name | cut -d '=' -f 2`
