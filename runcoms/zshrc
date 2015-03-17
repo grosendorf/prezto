@@ -14,7 +14,6 @@ export CHEF_REPO_DIR=${ZDOTDIR:-$HOME}/Workspace/Deployment/chef
 export EDITOR=vim
 unsetopt correct_all
 export PATH=$PATH:${ZDOTDIR:-$HOME}/Workspace/android-sdk-macosx/platform-tools:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin
-eval "$(chef shell-init zsh)"
 export COPYFILE_DISABLE=true
 autoload -Uz history-beginning-search-menu
 zle -N history-beginning-search-menu
@@ -35,7 +34,6 @@ export AWS_AUTO_SCALING_HOME=${AWS_BASE}/AutoScaling
 export AWS_EMR_HOME=${AWS_BASE}/elastic-map-reduce
 export PATH=${PATH}:/Users/grosendorf/Workspace/ansible/bin:${EC2_HOME}/bin:${AWS_ELB_HOME}/bin:${AWS_AUTO_SCALING_HOME}/bin:/Applications/Android\ Studio.app/sdk/platform-tools:${AWS_EMR_HOME}
 export MANPATH=/Users/grosendorf/Workspace/ansible/docs/man:
-workon twc
 
 alias sga='cat ~/.zprezto/modules/git/alias.zsh'
 # AWS Credentials
