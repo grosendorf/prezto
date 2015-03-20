@@ -14,6 +14,7 @@ export CHEF_REPO_DIR=${ZDOTDIR:-$HOME}/Workspace/Deployment/chef
 export EDITOR=vim
 unsetopt correct_all
 export PATH=$PATH:${ZDOTDIR:-$HOME}/Workspace/android-sdk-macosx/platform-tools:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin
+eval "$(chef shell-init zsh)"
 export COPYFILE_DISABLE=true
 autoload -Uz history-beginning-search-menu
 zle -N history-beginning-search-menu
