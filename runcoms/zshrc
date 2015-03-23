@@ -10,7 +10,6 @@ fi
 source /usr/local/bin/virtualenvwrapper.sh
 
 # Customize to your needs...
-export CHEF_REPO_DIR=${ZDOTDIR:-$HOME}/Workspace/Deployment/chef
 export EDITOR=vim
 unsetopt correct_all
 export PATH=$PATH:${ZDOTDIR:-$HOME}/Workspace/android-sdk-macosx/platform-tools:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin
@@ -50,6 +49,7 @@ aws_on() {
  export CHEF_SERVER_URL=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_server_url | cut -d '=' -f 2`
  export CHEF_VALIDATOR_NAME=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_validator_name | cut -d '=' -f 2`
  export CHEF_USERNAME=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_username | cut -d '=' -f 2`
+ export CHEF_REPO_DIR=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_repo_dir | cut -d '=' -f 2`
  # EC2 API
  export AWS_ACCESS_KEY=`cat ${AWS_CREDENTIAL_FILE} |grep AWSAccessKey |cut -d '=' -f 2`
  export AWS_SECRET_KEY=`cat ${AWS_CREDENTIAL_FILE} |grep AWSSecretKey |cut -d '=' -f 2`
