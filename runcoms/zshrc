@@ -41,6 +41,7 @@ alias sga='cat ~/.zprezto/modules/git/alias.zsh'
 aws_on() {
  export AWS_FULL=${1}
  export AWS_ACCOUNT=$(echo ${1} | awk -F "_" '{print $1}')
+ export AWS_REGION=$(echo ${1} | awk -F "_" '{print $2}')
 
  # AWS API
  export AWS_CREDENTIAL_FILE=${AWS_FILES}/credential-file_${AWS_ACCOUNT}
@@ -55,9 +56,15 @@ aws_on() {
  export CHEF_USERNAME=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_username | cut -d '=' -f 2`
  export CHEF_REPO_DIR=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_repo_dir | cut -d '=' -f 2`
 
+ # Chef Provisioning
+ export AWS_CONFIG_FILE=~/.aws/config
+ if [ ! -z ${AWS_REGION} ]; then
+    export CHEF_DRIVER=aws::$AWS_REGION
+ fi
+
  # EC2 API
- export AWS_ACCESS_KEY=`cat ${AWS_CREDENTIAL_FILE} |grep AWSAccessKey |cut -d '=' -f 2`
- export AWS_SECRET_KEY=`cat ${AWS_CREDENTIAL_FILE} |grep AWSSecretKey |cut -d '=' -f 2`
+ export AWS_ACCESS_KEY=`cat ${AWS_CREDENTIAL_FILE} |grep aws_access_key_id |cut -d '=' -f 2`
+ export AWS_SECRET_KEY=`cat ${AWS_CREDENTIAL_FILE} |grep aws_secret_access_key |cut -d '=' -f 2`
  export AWS_REGION=$(echo ${1} | awk -F "_" '{print $2}')
 
  # BOTO
