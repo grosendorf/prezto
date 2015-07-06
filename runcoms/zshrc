@@ -50,12 +50,14 @@ aws_on() {
  export CHEF_CREDENTIAL_FILE=~/.chef/config/chef-settings_${AWS_ACCOUNT}
 
  #Chef Server
- export CHEF_SERVER_URL=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_server_url | cut -d '=' -f 2`
- export CHEF_VALIDATOR_NAME=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_validator_name | cut -d '=' -f 2`
- export CHEF_VALIDATOR_FILE=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_validator_file | cut -d '=' -f 2`
- export CHEF_USERNAME=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_username | cut -d '=' -f 2`
- export CHEF_REPO_DIR=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_repo_dir | cut -d '=' -f 2`
-
+ if [ -f $CHEF_CREDENTIAL_FILE ]; then
+     export CHEF_SERVER_URL=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_server_url | cut -d '=' -f 2`
+     export CHEF_VALIDATOR_NAME=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_validator_name | cut -d '=' -f 2`
+     export CHEF_VALIDATOR_FILE=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_validator_file | cut -d '=' -f 2`
+     export CHEF_USERNAME=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_username | cut -d '=' -f 2`
+     export CHEF_REPO_DIR=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_repo_dir | cut -d '=' -f 2`
+ fi
+ 
  # Chef Provisioning
  export AWS_CONFIG_FILE=~/.aws/config
  if [ ! -z ${AWS_REGION} ]; then
