@@ -14,6 +14,7 @@ export EDITOR=vim
 unsetopt correct_all
 export PATH=$PATH:${ZDOTDIR:-$HOME}/Workspace/android-sdk-macosx/platform-tools:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin
 eval "$(chef shell-init zsh)"
+# eval "$(hub alias -s)"
 export COPYFILE_DISABLE=true
 autoload -Uz history-beginning-search-menu
 zle -N history-beginning-search-menu
@@ -22,6 +23,7 @@ bindkey -M viins '^R' history-incremental-search-backward
 bindkey -M vicmd '^R' history-incremental-search-backward
 bindkey -v
 alias lr='ls -lrth'
+alias sourcetree='open -a SourceTree'
 alias s3cmd='s3cmd -c ${AWS_FILES}/s3cfg_${AWS_ACCOUNT}'
 alias watch='watch -c'
 
@@ -32,7 +34,7 @@ export EC2_HOME=${AWS_BASE}/ec2-api-tools
 export AWS_ELB_HOME=${AWS_BASE}/ElasticLoadBalancing
 export AWS_AUTO_SCALING_HOME=${AWS_BASE}/AutoScaling
 export AWS_EMR_HOME=${AWS_BASE}/elastic-map-reduce
-export PATH=${PATH}:/Users/grosendorf/Workspace/ansible/bin:${EC2_HOME}/bin:${AWS_ELB_HOME}/bin:${AWS_AUTO_SCALING_HOME}/bin:/Applications/Android\ Studio.app/sdk/platform-tools:${AWS_EMR_HOME}
+export PATH=${PATH}:/opt/otto:/opt/packer:/Users/grosendorf/Workspace/ansible/bin:${EC2_HOME}/bin:${AWS_ELB_HOME}/bin:${AWS_AUTO_SCALING_HOME}/bin:/Applications/Android\ Studio.app/sdk/platform-tools:${AWS_EMR_HOME}
 export MANPATH=/Users/grosendorf/Workspace/ansible/docs/man:
 workon twc
 
@@ -56,6 +58,7 @@ aws_on() {
      export CHEF_VALIDATOR_FILE=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_validator_file | cut -d '=' -f 2`
      export CHEF_USERNAME=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_username | cut -d '=' -f 2`
      export CHEF_REPO_DIR=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_repo_dir | cut -d '=' -f 2`
+     export CLIENT_KEY=`cat ${CHEF_CREDENTIAL_FILE} | grep chef_client_key | cut -d '=' -f 2`
  fi
 
  # Chef Provisioning
@@ -72,6 +75,8 @@ aws_on() {
  # Gem TF_VARs
  export TF_VAR_project_aws_access_key=`cat ${AWS_CREDENTIAL_FILE} |grep aws_access_key_id |cut -d '=' -f 2`
  export TF_VAR_project_aws_secret_key=`cat ${AWS_CREDENTIAL_FILE} |grep aws_secret_access_key |cut -d '=' -f 2`
+ export TF_VAR_project_dns_aws_access_key=`cat ~/.aws/aws_files/credential-file_grid-prod | grep aws_access_key_id | cut -d '=' -f 2`
+ export TF_VAR_project_dns_aws_secret_key=`cat ~/.aws/aws_files/credential-file_grid-prod | grep aws_secret_access_key | cut -d '=' -f 2`
  export AWS_REGION=$(echo ${1} | awk -F "_" '{print $2}')
 
  # BOTO
@@ -80,7 +85,6 @@ aws_on() {
 
  # WHISK
  export WHISK_CONFIG=${CHEF_REPO_DIR}/config/whisk-${AWS_FULL}.yml
- export CLIENT_KEY=~/.chef/${ZDOTDIR:-$USER}-${AWS_ACCOUNT}.pem
 }
 
 aws_off() {

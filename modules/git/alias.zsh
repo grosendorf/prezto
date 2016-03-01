@@ -180,6 +180,9 @@ alias gwC='git clean -f'
 alias gwx='git rm -r'
 alias gwX='git rm -rf'
 
+# Hub
+alias gpr='git pull-request'
+
 # Work with subdirectories of repos
 alias gpad='find . -type d -depth 1 -exec bash -c "echo \"pulling {}\"; git --git-dir={}/.git --work-tree=$PWD/{} pull" \;'
 compdef _git gpad=git-pull-all-dirs
