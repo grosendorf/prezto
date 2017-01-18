@@ -10,10 +10,17 @@ fi
 source /usr/local/bin/virtualenvwrapper.sh
 
 # Customize to your needs...
+# Set PATH
+export PATH=/Users/grosendorf/.gem/ruby/2.3.0/bin:/opt/nomad_0.4.1:/opt/consul_0.7.0:/opt/vault_0.6.2:$PATH
+
+# Set GOPATH
+export GOPATH=~/src/gopath
+export PATH=${GOPATH}/bin:$PATH
+
 export EDITOR=vim
 unsetopt correct_all
-export PATH=$PATH:${ZDOTDIR:-$HOME}/Workspace/android-sdk-macosx/platform-tools:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin
-eval "$(chef shell-init zsh)"
+# eval "$(chef shell-init zsh)"
+eval "$(rbenv init -)"
 # eval "$(hub alias -s)"
 export COPYFILE_DISABLE=true
 autoload -Uz history-beginning-search-menu
@@ -22,28 +29,23 @@ bindkey '^X^X' history-beginning-search-menu
 bindkey -M viins '^R' history-incremental-search-backward
 bindkey -M vicmd '^R' history-incremental-search-backward
 bindkey -v
-alias lr='ls -lrth'
+
 alias sourcetree='open -a SourceTree'
-alias s3cmd='s3cmd -c ${AWS_FILES}/s3cfg_${AWS_ACCOUNT}'
 alias watch='watch -c'
 
-# AWS Tools API
-AWS_BASE=~/.aws
-AWS_FILES=${AWS_BASE}/aws_files
-export EC2_HOME=${AWS_BASE}/ec2-api-tools
-export AWS_ELB_HOME=${AWS_BASE}/ElasticLoadBalancing
-export AWS_AUTO_SCALING_HOME=${AWS_BASE}/AutoScaling
-export AWS_EMR_HOME=${AWS_BASE}/elastic-map-reduce
-export PATH=${PATH}:/opt/otto:/opt/packer:/Users/grosendorf/Workspace/ansible/bin:${EC2_HOME}/bin:${AWS_ELB_HOME}/bin:${AWS_AUTO_SCALING_HOME}/bin:/Applications/Android\ Studio.app/sdk/platform-tools:${AWS_EMR_HOME}
-export MANPATH=/Users/grosendorf/Workspace/ansible/docs/man:
+# Set default virtualenv
 workon twc
 
 alias sga='cat ~/.zprezto/modules/git/alias.zsh'
 # AWS Credentials
+AWS_BASE=~/.aws
+AWS_FILES=${AWS_BASE}/aws_files
+
 aws_on() {
  export AWS_FULL=${1}
  export AWS_ACCOUNT=$(echo ${1} | awk -F "_" '{print $1}')
  export AWS_REGION=$(echo ${1} | awk -F "_" '{print $2}')
+ export AWS_DEFAULT_REGION=${AWS_REGION}
 
  # AWS API
  export AWS_CREDENTIAL_FILE=${AWS_FILES}/credential-file_${AWS_ACCOUNT}
@@ -101,3 +103,6 @@ finder_showall() {
  defaults write com.apple.finder AppleShowAllFiles ${1}
  killall Finder
 }
+
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
