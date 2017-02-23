@@ -25,6 +25,7 @@ zstyle ':prezto:*:*' color 'yes'
 # The order matters.
 zstyle ':prezto:load' pmodule \
   'archive' \
+  'aws' \
   'environment' \
   'terminal' \
   'editor' \
@@ -36,7 +37,7 @@ zstyle ':prezto:load' pmodule \
   'prompt' \
   'git' \
   'homebrew' \
-  'osx' 
+  'osx'
 
 #
 # Editor
