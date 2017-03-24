@@ -41,5 +41,9 @@ finder_showall() {
  killall Finder
 }
 
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# If kubectl is installed, run shell completion function
+if hash kubectl 2> /dev/null; then
+ source <(kubectl completion zsh)
+fi
