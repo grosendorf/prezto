@@ -36,6 +36,7 @@
 
 # Load dependencies.
 pmodload 'helper'
+pmodload 'kubectl-prompt'
 
 function prompt_cloud_precmd {
   setopt LOCAL_OPTIONS
@@ -115,7 +116,7 @@ function prompt_cloud_setup {
 
   # Define prompts.
   PROMPT='%B%F{$primary_color}${prefix}%f%b  %B%F{$secondary_color}%c%f%b ${git_info:+${(e)git_info[prompt]}} '
-  RPROMPT='%B%F${AWS_FULL} %T%f%b'
+  RPROMPT='%B%F ($ZSH_KUBECTL_PROMPT) %f%b'
 }
 
 prompt_cloud_setup "$@"
