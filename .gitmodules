@@ -22,12 +22,6 @@
 [submodule "modules/autosuggestions/external"]
 	path = modules/autosuggestions/external
 	url = https://github.com/tarruda/zsh-autosuggestions
-[submodule "modules/prompt/external/kubectl"]
-	path = modules/prompt/external/kubectl
-	url = https://github.com/superbrothers/zsh-kubectl-prompt.git
-[submodule "modules/prompt/modules/prompt/external/kubectl"]
-	path = modules/prompt/modules/prompt/external/kubectl
-	url = https://github.com/superbrothers/zsh-kubectl-prompt.git
 [submodule "modules/kubectl-prompt"]
 	path = modules/kubectl-prompt
 	url = https://github.com/superbrothers/zsh-kubectl-prompt.git
