@@ -36,6 +36,8 @@ alias sga='cat ~/.zprezto/modules/git/alias.zsh'
 
 alias git=hub
 
+eval "$(rbenv init -)"
+
 finder_showall() {
  defaults write com.apple.finder AppleShowAllFiles ${1}
  killall Finder
