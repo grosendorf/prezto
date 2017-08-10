@@ -27,6 +27,7 @@ bindkey -M vicmd '^R' history-incremental-search-backward
 bindkey -v
 
 alias watch='watch -c'
+alias k=kubectl
 
 # Set default virtualenv
 workon devco
@@ -49,3 +50,29 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 if hash kubectl 2> /dev/null; then
  source <(kubectl completion zsh)
 fi
+alias ctx='kubectl config use-context'
+
+# Set Drone related env vars
+source ~/.drone
+
+setopt auto_cd
+cdpath=($HOME/src)
+
+kssh() {
+  POD=$1
+  ip=$(kubectl get pods $POD -o jsonpath='{.status.hostIP}')
+  if [ $? -ne '0' ] ; then
+    exit 1
+  fi
+  ssh $ip
+}
+
+nodessh() {
+  NODE=$1
+  ip=$(kubectl get node $NODE -o json | jq -r '.status.addresses | map(select(.type == "InternalIP"))[0] | .address')
+   if [ $? -ne '0' ] ; then
+    exit 1
+  fi
+  ssh $ip
+} 
+
