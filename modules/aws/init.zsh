@@ -1,6 +1,5 @@
 # AWS Credentials
 AWS_BASE=~/.aws
-AWS_FILES=${AWS_BASE}/aws_files
 AWS_REGION=us-east-1
 AWS_DEFAULT_REGION=us-east-1
 
