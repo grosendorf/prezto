@@ -26,18 +26,18 @@ zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:load' pmodule \
   'archive' \
   'aws' \
-  'environment' \
-  'terminal' \
-  'editor' \
-  'history' \
-  'directory' \
-  'spectrum' \
-  'utility' \
   'completion' \
-  'prompt' \
+  'environment' \
+  'directory' \
+  'editor' \
   'git' \
+  'history' \
   'homebrew' \
-  'osx'
+  'osx' \
+  'prompt' \
+  'spectrum' \
+  'terminal' \
+  'utility'
 
 #
 # Autosuggestions
